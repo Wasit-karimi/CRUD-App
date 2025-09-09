@@ -19,7 +19,7 @@ function getUsers() {
                   <td>${user.userEmail}</td>
                   <td>${user.userAddress}</td>
                   <td class="relative">
-                  <div class="absolute right-5 lg:right-10 top-1/2 -translate-y-1/2  h-[70%] px-2 flex gap-1 justify-center items-center shadow-md">
+                  <div class="absolute right-2 lg:right-10 top-1/2 -translate-y-1/2  h-[70%] px-2 flex gap-1 justify-center items-center shadow-md">
                   <i class="bi bi-trash2 group-hover:text-gray-400 hover:text-gray-200 duration-200 transition-all" data-id = "${user.id}"></i>
                   <i class="bi bi-pen group-hover:text-gray-400 hover:text-gray-200 duration-200 transition-all" data-id = "${user.id}"></i></div>
                   </td>
@@ -89,6 +89,12 @@ form.addEventListener("submit", (e) => {
 
     // And push it in users array
     users.push(user);
+
+    // Remove edit id after finishing the update
+    form.removeAttribute("data-edit-id");
+
+    // Changes the submit button text
+    submit.value = "Add User";
   }
 
   // log for testing (optional)
@@ -114,6 +120,8 @@ list.addEventListener("click", (e) => {
   if (e.target.classList.contains("bi-trash2")) {
     // Store the id of that specific user thats been passed through the id attribute
     let userId = Number(e.target.dataset.id);
+
+    console.log(e.target.dataset)
 
     // Check if the user confirm deletion and the remove it using filter method save the array in the localStorage and load the page again
     if (confirm("Are You Sure ?")) {
